@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_smart_bot_smart_bot,smart_bot.smart_bot,model_smart_bot_smart_bot,base.group_user,1,1,1,1
