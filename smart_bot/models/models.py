@@ -1,18 +1,18 @@
 # -*- coding: utf-8 -*-
 
-# from odoo import models, fields, api
+from odoo import models, fields, api
 
 
-# class smart_bot(models.Model):
-#     _name = 'smart_bot.smart_bot'
-#     _description = 'smart_bot.smart_bot'
+class SmartBot(models.Model):
+    _name = 'smart_bot.smart_bot'
+    _inherit = 'mail.bot'
+    _description = 'smart_bot.smart_bot'
 
-#     name = fields.Char()
-#     value = fields.Integer()
-#     value2 = fields.Float(compute="_value_pc", store=True)
-#     description = fields.Text()
-#
-#     @api.depends('value')
-#     def _value_pc(self):
-#         for record in self:
-#             record.value2 = float(record.value) / 100
+    def _get_answer(self, record, body, values, command=False):
+        # onboarding
+        odoobot_state = self.env.user.odoobot_state
+        if self._is_bot_in_private_channel(record):
+            # main flow
+            if odoobot_state == 'onboarding_emoji' and self._body_contains_emoji(body):
+                self.env.user.odoobot_state = "onboarding_attachement"
+                return _("Great! 👍<br/>Now, try to <b>send an attachment</b>, like a picture of your cute dog...")
