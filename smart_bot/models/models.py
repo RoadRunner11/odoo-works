@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from odoo import models, fields, api, _
+from odoo import models, _, fields, api
 
 class SmartBot(models.AbstractModel):
     # _name = 'smart_bot.smart_bot'
