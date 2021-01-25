@@ -3,7 +3,7 @@
 from odoo import models, fields, api
 
 
-class SmartBot(models.Model):
+class SmartBot(models.AbstractModel):
     # _name = 'smart_bot.smart_bot'
     _inherit = 'mail.bot'
     # _description = 'smart_bot.smart_bot'
