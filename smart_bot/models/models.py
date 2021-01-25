@@ -13,6 +13,6 @@ class SmartBot(models.AbstractModel):
         if self._is_bot_in_private_channel(record):
             # main flow
             if "hello bot" in body:
-                return _("Hello from Ehio Technologies!")
+                return ("Hello from Ehio Technologies!")
                 
         return super(SmartBot, self)._get_answer(record, body, values, command=False)
