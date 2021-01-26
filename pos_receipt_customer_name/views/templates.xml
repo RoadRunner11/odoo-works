@@ -20,6 +20,7 @@
           </dl>
         </template>
 -->
+<!-- 
         <template id="pos_custom_extended" inherit_id="point_of_sale.template" xml:space="preserve">
 
           <t t-name="PosTicket">
@@ -33,6 +34,7 @@
           </t>
 
         </template>
+       -->
 
     </data>
 </odoo>
