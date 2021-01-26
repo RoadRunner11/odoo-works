@@ -20,33 +20,19 @@
           </dl>
         </template>
 -->
-        <!-- <template id="pos_custom_extended" inherit_id="point_of_sale.template" xml:space="preserve">
+        <template id="pos_custom_extended" inherit_id="point_of_sale.template" xml:space="preserve">
 
           <t t-name="PosTicket">
-
-        
-
             <br />
-
-            <t t-esc="widget.pos.company.name"/><br />
-
-            <!-- Phone: <t t-esc="widget.pos.company.phone || ''"/><br /> -->
-
-            User: <t t-esc="widget.pos.cashier ? widget.pos.cashier.name : widget.pos.user.name"/><br />
 
             <t t-if="order.changed.client.name">
               customer : <t t-esc="order.changed.client.name"/><br />
             </t>
 
-            <!-- Shop: <t t-esc="widget.pos.shop.name"/><br /> -->
-
             <br />
-
-        
-
           </t>
 
-        </template> -->
+        </template>
 
     </data>
 </odoo>
