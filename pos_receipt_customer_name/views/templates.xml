@@ -2,7 +2,7 @@
 <odoo>
     <data>
 
-        <template id="template" inherit_id="point_of_sale.template">
+        <templates id="template" inherit_id="point_of_sale.template">
             <t t-name="PosTicket">
               <br />
 
@@ -12,7 +12,7 @@
 
               <br />
             </t>
-        </template>
+        </templates>
 
     </data>
 </odoo>
