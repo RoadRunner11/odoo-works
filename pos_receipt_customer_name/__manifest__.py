@@ -32,4 +32,7 @@
     'demo': [
         'demo/demo.xml',
     ],
+    'qweb': [
+        'static/src/xml/pos_receipt_customer_name.xml',
+    ],
 }

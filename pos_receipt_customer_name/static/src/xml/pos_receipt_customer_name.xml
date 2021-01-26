@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<templates id="template" inherit_id="point_of_sale.template">
+
+  <t t-extend="OrderReceipt">
+    <br />
+    <t t-esc="widget.pos.company.name"/><br />
+    <t t-if="order.changed.client.name">
+      customer : <t t-esc="order.changed.client.name"/><br />
+    </t>
+    <br />
+  </t>
+
+</templates>
