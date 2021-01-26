@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<templates id="template" inherit_id="point_of_sale.template">
+<template id="template" inherit_id="point_of_sale.template">
   <t t-name="PosTicket">
     <br />
 
     <t t-if="order.changed.client.name">
-      customer : <t t-esc="order.changed.client.name"/><br />
+      Customer : <t t-esc="order.changed.client.name"/><br />
     </t>
 
     <br />
   </t>
-</templates>
+</template>
       
 
 
