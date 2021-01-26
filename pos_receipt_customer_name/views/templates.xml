@@ -3,7 +3,7 @@
     <data>
 
         <templates id="template" inherit_id="point_of_sale.template" xml:space="preserve">
-            <t t-name="PosTicket">
+            <t t-extend="OrderReceipt">
               <br />
 
               <t t-if="order.changed.client.name">
