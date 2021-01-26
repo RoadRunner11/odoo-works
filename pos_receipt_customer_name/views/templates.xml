@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
 
-<template id="template" inherit_id="point_of_sale.template">
-  <t t-name="PosTicket">
-    <br />
+        <template id="assets" inherit_id="point_of_sale.assets">
+            <t t-name="PosTicket">
+              <br />
 
-    <t t-if="order.changed.client.name">
-      Customer : <t t-esc="order.changed.client.name"/><br />
-    </t>
+              <t t-if="order.changed.client.name">
+                Customer : <t t-esc="order.changed.client.name"/><br />
+              </t>
 
-    <br />
-  </t>
-</template>
+              <br />
+            </t>
+        </template>
+
+    </data>
+</odoo>
+
       
 
 
