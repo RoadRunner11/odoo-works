@@ -35,4 +35,7 @@
     'qweb': [
         'static/src/xml/pos_receipt_customer_name.xml',
     ],
+    'installable': True,
+	'auto_install': False,
+	'application': True,
 }

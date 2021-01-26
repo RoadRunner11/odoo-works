@@ -3,12 +3,11 @@
 <templates id="template" inherit_id="point_of_sale.template">
 
   <t t-extend="OrderReceipt">
-    <br />
-    <t t-esc="widget.pos.company.name"/><br />
-    <t t-if="order.changed.client.name">
-      customer : <t t-esc="order.changed.client.name"/><br />
-    </t>
-    <br />
-  </t>
+       <t t-jquery=".pos-receipt .pos-receipt-contact" t-operation='append'>
+           <t t-if='receipt.client'>
+               <div style="font-weight:bold;">Customer:<t t-esc='receipt.client'/></div>
+           </t>
+       </t>
+   </t>
 
 </templates>
