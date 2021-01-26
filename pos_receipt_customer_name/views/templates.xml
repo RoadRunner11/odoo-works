@@ -1,39 +1,16 @@
-<odoo>
-    <data>
-    
-        <templates id="template" inherit_id="point_of_sale.template">
-          <t t-name="PosTicket">
-            <!-- <br />
+<?xml version="1.0" encoding="utf-8"?>
 
-            <t t-if="order.changed.client.name">
-              customer : <t t-esc="order.changed.client.name"/><br />
-            </t>
+<templates id="template" inherit_id="point_of_sale.template">
+  <t t-name="PosTicket">
+    <br />
 
-            <br /> -->
-          </t>
-        </templates>
+    <t t-if="order.changed.client.name">
+      customer : <t t-esc="order.changed.client.name"/><br />
+    </t>
+
+    <br />
+  </t>
+</templates>
       
-<!--
-        <template id="listing">
-          <ul>
-            <li t-foreach="objects" t-as="object">
-              <a t-attf-href="#{ root }/objects/#{ object.id }">
-                <t t-esc="object.display_name"/>
-              </a>
-            </li>
-          </ul>
-        </template>
-        <template id="object">
-          <h1><t t-esc="object.display_name"/></h1>
-          <dl>
-            <t t-foreach="object._fields" t-as="field">
-              <dt><t t-esc="field"/></dt>
-              <dd><t t-esc="object[field]"/></dd>
-            </t>
-          </dl>
-        </template>
--->
 
 
-    </data>
-</odoo>
