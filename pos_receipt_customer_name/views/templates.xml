@@ -1,7 +1,7 @@
 <odoo>
     <data>
     
-        <template id="pos_custom_extended" inherit_id="point_of_sale.template" xml:space="preserve">
+        <templates id="template" inherit_id="point_of_sale.template">
           <t t-name="PosTicket">
             <!-- <br />
 
@@ -11,7 +11,7 @@
 
             <br /> -->
           </t>
-        </template>
+        </templates>
       
 <!--
         <template id="listing">
