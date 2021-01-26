@@ -1,15 +1,15 @@
 <odoo>
     <data>
     
-        <template id="pos_custom_extended" inherit_id="point_of_sale.template" >
+        <template id="pos_custom_extended" inherit_id="point_of_sale.template" xml:space="preserve">
           <t t-name="PosTicket">
-            <br />
+            <!-- <br />
 
             <t t-if="order.changed.client.name">
               customer : <t t-esc="order.changed.client.name"/><br />
             </t>
 
-            <br />
+            <br /> -->
           </t>
         </template>
       
