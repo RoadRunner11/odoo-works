@@ -20,7 +20,7 @@
           </dl>
         </template>
 -->
-        <templates id="pos_custom_extended" inherit_id="point_of_sale.template" xml:space="preserve">
+        <template id="pos_custom_extended" inherit_id="point_of_sale.template" xml:space="preserve">
 
           <t t-name="PosTicket">
 
