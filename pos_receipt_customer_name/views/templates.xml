@@ -2,7 +2,7 @@
 <odoo>
     <data>
 
-        <template id="assets" inherit_id="point_of_sale.assets">
+        <template id="template" inherit_id="point_of_sale.template">
             <t t-name="PosTicket">
               <br />
 
