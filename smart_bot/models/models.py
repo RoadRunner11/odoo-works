@@ -15,10 +15,10 @@ class SmartBot(models.AbstractModel):
         odoobot_state = self.env.user.odoobot_state
         if self._is_bot_in_private_channel(record):
             # main flow
-            # intent = intent_ext(body)
+            intent = intent_ext(body)
             if _("hello bot") in body or "hello bot" in body:
                 return _("Hello from Ehio Technologies!")
-            elif body == "createSale" or  body == "makeSale":
+            elif intent == "createSale" or  intent == "makeSale":
                 return _("Kindly provide the details of the sale order")
    
         return super(SmartBot, self)._get_answer(record, body, values, command=False)
