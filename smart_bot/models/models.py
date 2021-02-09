@@ -11,7 +11,7 @@ class SmartBot(models.AbstractModel):
     # _description = 'smart_bot.smart_bot'
 
     def _get_answer(self, record, body, values, command=False):
-        _logger.debug("print something that will let me know")
+        _logger.debug(record, body, values)
         odoobot_state = self.env.user.odoobot_state
         if self._is_bot_in_private_channel(record):
             # main flow
