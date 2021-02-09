@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, _, fields, api
-from utils import intent_ext
+from .utils import intent_ext
 class SmartBot(models.AbstractModel):
     # _name = 'smart_bot.smart_bot'
     _inherit = 'mail.bot'
