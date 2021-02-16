@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo noupdate="1">
-    <!-- <record id="payment.payment_acquirer_yoco" model="payment.acquirer">
+    <record id="payment.payment_acquirer_yoco" model="payment.acquirer">
         <field name="name">Yoco</field>
         <field name="provider">yoco</field>
         <field name="company_id" ref="base.main_company"/>
         <field name="view_template_id" ref="yoco_form"/>
-    </record> -->
+
+        <field name="description" type="html">
+                    <p>
+                        A payment gateway to accept online payments via Yoco Pay.
+                    </p>
+                    <p>
+                         <i class="fa fa-check"/>Online Payment
+                        <i class="fa fa-check"/>eCommerce
+                        <i class="fa fa-check"/>Invoicing
+                        <i class="fa fa-check"/>Subscription
+                        <i class="fa fa-check"/>Save Cards
+                    </p>
+                </field>
+    </record>
 </odoo>
