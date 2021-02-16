@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import logging
 import pprint
 import werkzeug
@@ -9,11 +10,9 @@ from odoo.addons.payment.controllers.portal import PaymentProcessing
 _logger = logging.getLogger(__name__)
 
 
-class YocoController(http.Controller):
-    _success_url = '/payment/yoco/success'
-    _cancel_url = '/payment/yoco/cancel'
-
-    @http.route(['/payment/yoco/values'], type='json', auth='public')
+class RaveController(http.Controller):
+    
+    @http.route(['/payment/values'], type='json', auth='public')
     def return_payment_values(self, **post):
         """ Upadate the payment values from the database"""
         acquirer_id = int(post.get('acquirer_id'))
