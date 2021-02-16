@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="payment_acquirer_form_inherit_payment_yoco" model="ir.ui.view">
+    <!-- <record id="payment_acquirer_form_inherit_payment_yoco" model="ir.ui.view">
         <field name="name">payment.acquirer.form.inherit.payment.yoco</field>
         <field name="model">payment.acquirer</field>
         <field name="inherit_id" ref="payment.acquirer_form"/>
@@ -13,5 +13,5 @@
                 </group>
             </xpath>
         </field>
-    </record>
+    </record> -->
 </odoo>
