@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_yoco_payments_acquirer_yoco_payments_acquirer,yoco_payments_acquirer.yoco_payments_acquirer,model_yoco_payments_acquirer_yoco_payments_acquirer,base.group_user,1,1,1,1
