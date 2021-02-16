@@ -1,26 +1,26 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "payment_yoco",
+    'name': "Yoco Payment Acquirer",
 
     'summary': """
-        Short (1 phrase/line) summary of the module's purpose, used as
-        subtitle on modules listing or apps.openerp.com""",
+        Payment Acquirer for Yoco Payments""",
 
     'description': """
-        Long description of module's purpose
+        This module is created for clients that want to
+        use Yoco Payments as the one of the payment gateways in 
+        their Odoo system
     """,
 
-    'author': "My Company",
-    'website': "http://www.yourcompany.com",
-
+    'author': "Fodilu Olawale Akorede",
+    'website': "https://www.ehiotech.com/
     # Categories can be used to filter modules in modules listing
-    # Check https://github.com/odoo/odoo/blob/13.0/odoo/addons/base/data/ir_module_category_data.xml
+    # Check https://github.com/odoo/odoo/blob/14.0/odoo/addons/base/data/ir_module_category_data.xml
     # for the full list
-    'category': 'Uncategorized',
+    'category': 'Accounting',
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base'],
+    'depends': ['base', 'payment'],
 
     # always loaded
     'data': [
