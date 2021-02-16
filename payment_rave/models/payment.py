@@ -31,7 +31,7 @@ class PaymentAcquirerStripe(models.Model):
         else :
             return 'ravesandboxapi.flutterwave.com'
 
-    @api.multi
+    # @api.multi
     def rave_form_generate_values(self, tx_values):
         self.ensure_one()
         rave_tx_values = dict(tx_values)
@@ -72,7 +72,7 @@ class PaymentTransactionRave(models.Model):
         _logger.info('_rave_verify_charge: Values received:\n%s', pprint.pformat(r))
         return self._rave_validate_tree(r.json(),data)
 
-    @api.multi
+    # @api.multi
     def _rave_validate_tree(self, tree, data):
         self.ensure_one()
         if self.state != 'draft':
