@@ -20,7 +20,7 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base'],
+    'depends': ['payment'],
 
     # always loaded
     'data': [
@@ -32,4 +32,7 @@
     'demo': [
         'demo/demo.xml',
     ],
+    'images': ['static/description/icon.png'],
+    'installable': True,
+    'application': True,
 }
