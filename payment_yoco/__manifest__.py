@@ -25,8 +25,9 @@
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',
-        'views/views.xml',
-        'views/templates.xml',
+        'views/yoco_views.xml',
+        'views/payment_yoco_templates.xml',
+        'data/payment_acquirer_data.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
