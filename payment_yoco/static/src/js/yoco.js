@@ -55,12 +55,12 @@ odoo.define('payment_stripe.stripe', function (require) {
         //                 '</h2>'
         //     });
         // }
-        var paymentForm = $('.o_payment_form');
-        if (!paymentForm.find('i').length) {
-            paymentForm.append('<i class="fa fa-spinner fa-spin"/>');
-            paymentForm.attr('disabled', 'disabled');
-            console.log("there is paymentForm")
-        }
+        // var paymentForm = $('.o_payment_form');
+        // if (!paymentForm.find('i').length) {
+        //     paymentForm.append('<i class="fa fa-spinner fa-spin"/>');
+        //     paymentForm.attr('disabled', 'disabled');
+        //     console.log("there is paymentForm")
+        // }
 
         var _getYocoInputValue = function (name) {
             return provider_form.find('input[name="' + name + '"]').val();
