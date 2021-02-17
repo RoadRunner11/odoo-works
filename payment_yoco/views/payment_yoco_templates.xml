@@ -19,6 +19,9 @@
             <input type="hidden" name='address_country' t-att-value='address_country'/>
             <input type="hidden" name='phone' t-att-value='phone'/>
             <input type="hidden" name='email' t-att-value='email'/>
+            
+            <input type="hidden" name="yoco_pub_key" t-att-value="acquirer.yoco_pub_key"/>
+            <input type="hidden" name="yoco_sec_key" t-att-value="acquirer.yoco_sec_key"/>
             <script type="text/javascript" >
                 odoo.define(function (require) {
                         var ajax = require('web.ajax');
