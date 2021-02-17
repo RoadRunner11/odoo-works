@@ -101,9 +101,9 @@ odoo.define('payment_stripe.stripe', function (require) {
             phone : get_input_value("phone"),
             return_url :   get_input_value("return_url"),
             merchant :  get_input_value("merchant")
-        }).done(function(data){
+        }).then(function(data){
             payWithYoco(data.publicKey,data.email,data.amount,data.phone,data.currency,data.invoice_num);
-        }).fail(function(data){
+        }).catch(function(data){
             console.log("Failed!");
             var msg = data && data.data && data.data.message;
             var wizard = $(qweb.render('yoco.error', {'msg': msg || _t('Payment error')}));
