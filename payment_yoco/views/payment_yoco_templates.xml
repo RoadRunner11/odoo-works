@@ -2,7 +2,7 @@
 <odoo>
     <template id="yoco_form">
             <input type="hidden" name="data_set" t-att-data-action-url="tx_url" data-remove-me=""/>
-            <input id="acquirer_rave" type="hidden" name="acquirer" t-att-value="acquirer.id"/>
+            <input id="acquirer_yoco" type="hidden" name="acquirer" t-att-value="acquirer.id"/>
             <!-- <input type="hidden" name='stripe_image' t-att-value="acquirer.stripe_image_url"/> -->
             <input type="hidden" name='merchant' t-att-value='acquirer.company_id.name'/>
             <input type="hidden" name='amount' t-att-value="amount"/>
