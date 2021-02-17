@@ -67,10 +67,10 @@ odoo.define('payment_rave.rave', function(require) {
         function display_rave_form(provider_form){
             // Open Checkout with further options
             var payment_form = $('.o_payment_form');
-            if(!payment_form.find('i').length)
+            if(!payment_form.find('i').length){
                 payment_form.append('<i class="fa fa-spinner fa-spin"/>');
                 payment_form.attr('disabled','disabled');
-
+            }
             var payment_tx_url = payment_form.find('input[name="prepare_tx_url"]').val();
             var access_token = $("input[name='access_token']").val() || $("input[name='token']").val() || '';
 
@@ -89,9 +89,9 @@ odoo.define('payment_rave.rave', function(require) {
                 phone : get_input_value("phone"),
                 return_url :   get_input_value("return_url"),
                 merchant :  get_input_value("merchant")
-            }).done(function(data){
+            }).then(function(data){
                 payWithRave(data.publicKey,data.email,data.amount,data.phone,data.currency,data.invoice_num);
-            }).fail(function(data){
+            }).catch(function(data){
                 console.log("Failed!");
                 var msg = data && data.data && data.data.message;
                 var wizard = $(qweb.render('rave.error', {'msg': msg || _t('Payment error')}));
