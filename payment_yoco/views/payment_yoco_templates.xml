@@ -19,5 +19,11 @@
             <input type="hidden" name='address_country' t-att-value='address_country'/>
             <input type="hidden" name='phone' t-att-value='phone'/>
             <input type="hidden" name='email' t-att-value='email'/>
+            <script type="text/javascript" >
+                odoo.define(function (require) {
+                        var ajax = require('web.ajax');
+                        ajax.loadJS("/payment_yoco/static/src/js/yoco.js");
+                    });
+            </script>
     </template>
 </odoo>

@@ -18,9 +18,9 @@ class PaymentAcquirerYoco(models.Model):
     _inherit = 'payment.acquirer'
 
     provider = fields.Selection(selection_add=[('yoco', 'Yoco')])#, ondelete={'yoco': 'set default'})
-    yoco_merchant_id = fields.Char(string="Yoco Merchant ID", required_if_provider='yoco', groups='base.group_user')
-    yoco_account_id = fields.Char(string="Yoco Account ID", required_if_provider='yoco', groups='base.group_user')
-    yoco_api_key = fields.Char(string="Yoco API Key", required_if_provider='yoco', groups='base.group_user')
+    # yoco_merchant_id = fields.Char(string="Yoco Merchant ID", required_if_provider='yoco', groups='base.group_user')
+    yoco_pub_key = fields.Char(string="Yoco Pub ID", required_if_provider='yoco', groups='base.group_user')
+    yoco_sec_key = fields.Char(string="Yoco Sec Key", required_if_provider='yoco', groups='base.group_user')
 
     def _get_yoco_urls(self, environment):
         """ PayUlatam URLs"""
@@ -31,3 +31,11 @@ class PaymentAcquirerYoco(models.Model):
 
 class PaymentTransactionYoco(models.Model):
     _inherit = 'payment.transaction'
+
+    payload = {
+            'APIKEY': self.acquirer_id.yoco_secret_key,
+            'txref': self.reference,
+        }
+    headers = {
+        'Content-Type': 'application/json',
+    }

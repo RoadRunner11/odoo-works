@@ -7,9 +7,8 @@
         <field name="arch" type="xml">
             <xpath expr='//group[@name="acquirer"]' position='inside'>
                 <group attrs="{'invisible': [('provider', '!=', 'yoco')]}">
-                    <field name="yoco_account_id" options="{'no_create': True}"/>
-                    <field name="yoco_merchant_id"/>
-                    <field name="yoco_api_key"/>
+                    <field name="yoco_sec_key" attrs="{'required':[ ('provider', '=', 'yoco'), ('state', '!=', 'disabled')]}" password="True"/>
+                    <field name="yoco_pub_key" attrs="{'required':[ ('provider', '=', 'yoco'), ('state', '!=', 'disabled')]}" password="True"/>
                 </group>
             </xpath>
         </field>
