@@ -28,9 +28,10 @@ odoo.define('payment_stripe.stripe', function (require) {
                 console.log(mutations[i].addedNodes)
                 console.log(mutations[i].addedNodes.length)
                 console.log(mutations[i].addedNodes.tagName)
-                if (mutations[i].addedNodes[j].tagName.toLowerCase() === "form" && mutations[i].addedNodes[j].getAttribute('provider') === 'yoco') {
-                    display_yoco_form($(mutations[i].addedNodes[j]));
-                }
+                display_yoco_form($(mutations[i].addedNodes[j]));
+                // if (mutations[i].addedNodes[j].tagName.toLowerCase() === "form" && mutations[i].addedNodes[j].getAttribute('provider') === 'yoco') {
+                //     display_yoco_form($(mutations[i].addedNodes[j]));
+                // }
             }
         }
     });
