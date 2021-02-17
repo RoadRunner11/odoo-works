@@ -16,6 +16,12 @@ odoo.define('payment_stripe.stripe', function (require) {
         $.blockUI.defaults.css["background-color"] = '';
         $.blockUI.defaults.overlayCSS["opacity"] = '0.9';
     }
+
+    require('web.dom_ready');
+    if (!$('.o_payment_form').length) {
+        return Promise.reject("DOM doesn't contain '.o_payment_form'");
+    }
+
     var observer = new MutationObserver(function (mutations, observer) {
         for (var i = 0; i < mutations.length; ++i) {
             for (var j = 0; j < mutations[i].addedNodes.length; ++j) {
@@ -33,11 +39,6 @@ odoo.define('payment_stripe.stripe', function (require) {
             $.unblockUI();
         }
         $("#o_payment_form_pay").removeAttr('disabled');
-    }
-
-    require('web.dom_ready');
-    if (!$('.o_payment_form').length) {
-        return Promise.reject("DOM doesn't contain '.o_payment_form'");
     }
     
     function display_yoco_form(provider_form){
