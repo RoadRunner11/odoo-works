@@ -28,10 +28,10 @@ odoo.define('payment_stripe.stripe', function (require) {
                 console.log(mutations[i].addedNodes)
                 console.log(mutations[i].addedNodes.length)
                 console.log(mutations[i].addedNodes.tagName)
-                display_yoco_form($(mutations[i].addedNodes[j]));
-                // if (mutations[i].addedNodes[j].tagName.toLowerCase() === "form" && mutations[i].addedNodes[j].getAttribute('provider') === 'yoco') {
-                //     display_yoco_form($(mutations[i].addedNodes[j]));
-                // }
+                // display_yoco_form($(mutations[i].addedNodes[j]));
+                if (mutations[i].addedNodes[j].tagName.toLowerCase() === "form" && mutations[i].addedNodes[j].getAttribute('provider') === 'yoco') {
+                    display_yoco_form($(mutations[i].addedNodes[j]));
+                }
             }
         }
     });
@@ -47,24 +47,25 @@ odoo.define('payment_stripe.stripe', function (require) {
     
     function display_yoco_form(provider_form){
         // Open Checkout with further options
-        if ($.blockUI) {
-            var msg = _t("Just one more second, We are redirecting you to Yoco...");
-            $.blockUI({
-                'message': '<h2 class="text-white"><img src="/web/static/src/img/spin.png" class="fa-pulse"/>' +
-                        '    <br />' + msg +
-                        '</h2>'
-            });
-        }
+        // if ($.blockUI) {
+        //     var msg = _t("Just one more second, We are redirecting you to Yoco...");
+        //     $.blockUI({
+        //         'message': '<h2 class="text-white"><img src="/web/static/src/img/spin.png" class="fa-pulse"/>' +
+        //                 '    <br />' + msg +
+        //                 '</h2>'
+        //     });
+        // }
         var paymentForm = $('.o_payment_form');
         if (!paymentForm.find('i').length) {
             paymentForm.append('<i class="fa fa-spinner fa-spin"/>');
             paymentForm.attr('disabled', 'disabled');
+            console.log("there is paymentForm")
         }
 
         var _getYocoInputValue = function (name) {
             return provider_form.find('input[name="' + name + '"]').val();
         };
-
+        console.log(_getYocoInputValue('yoco_pub_key'))
         var yoco = new window.YocoSDK({
             publicKey: _getYocoInputValue('yoco_pub_key'),
             });
@@ -89,7 +90,7 @@ odoo.define('payment_stripe.stripe', function (require) {
     }
 
     $.getScript("https://js.yoco.com/sdk/v1/yoco-sdk-web.js", function(data, textStatus, jqxhr) {
-        observer.observe(document.body, {childList: true});
+        // observer.observe(document.body, {childList: true});
         display_yoco_form($('form[provider="yoco"]'));
     });
     
