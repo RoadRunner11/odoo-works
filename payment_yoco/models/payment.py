@@ -32,10 +32,12 @@ class PaymentAcquirerYoco(models.Model):
 class PaymentTransactionYoco(models.Model):
     _inherit = 'payment.transaction'
 
-    payload = {
-            'APIKEY': self.acquirer_id.yoco_secret_key,
+    def _rave_verify_charge(self, data):
+        api_url_charge = 'https://%s/flwv3-pug/getpaidx/api/v2/verify' % (self.acquirer_id._get_rave_api_url())
+        payload = {
+            'SECKEY': self.acquirer_id.rave_secret_key,
             'txref': self.reference,
         }
-    headers = {
-        'Content-Type': 'application/json',
-    }
+        headers = {
+            'Content-Type': 'application/json',
+        }
