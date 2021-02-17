@@ -40,10 +40,7 @@ odoo.define('payment_stripe.stripe', function (require) {
             }
         })
     }
-    require('web.dom_ready');
-    if (!$('.o_payment_form').length) {
-        return Promise.reject("DOM doesn't contain '.o_payment_form'");
-    }
+    
 
     var observer = new MutationObserver(function (mutations, observer) {
         for (var i = 0; i < mutations.length; ++i) {
@@ -67,54 +64,58 @@ odoo.define('payment_stripe.stripe', function (require) {
         }
         $("#o_payment_form_pay").removeAttr('disabled');
     }
+    require('web.dom_ready');
+    if (!$('.o_payment_form').length) {
+        return Promise.reject("DOM doesn't contain '.o_payment_form'");
+    }else{
+        function display_yoco_form(provider_form){
+            // Open Checkout with further options
+            // if ($.blockUI) {
+            //     var msg = _t("Just one more second, We are redirecting you to Yoco...");
+            //     $.blockUI({
+            //         'message': '<h2 class="text-white"><img src="/web/static/src/img/spin.png" class="fa-pulse"/>' +
+            //                 '    <br />' + msg +
+            //                 '</h2>'
+            //     });
+            // }
+            // var paymentForm = $('.o_payment_form');
+            // if (!paymentForm.find('i').length) {
+            //     paymentForm.append('<i class="fa fa-spinner fa-spin"/>');
+            //     paymentForm.attr('disabled', 'disabled');
+            //     console.log("there is paymentForm")
+            // }
     
-    function display_yoco_form(provider_form){
-        // Open Checkout with further options
-        // if ($.blockUI) {
-        //     var msg = _t("Just one more second, We are redirecting you to Yoco...");
-        //     $.blockUI({
-        //         'message': '<h2 class="text-white"><img src="/web/static/src/img/spin.png" class="fa-pulse"/>' +
-        //                 '    <br />' + msg +
-        //                 '</h2>'
-        //     });
-        // }
-        // var paymentForm = $('.o_payment_form');
-        // if (!paymentForm.find('i').length) {
-        //     paymentForm.append('<i class="fa fa-spinner fa-spin"/>');
-        //     paymentForm.attr('disabled', 'disabled');
-        //     console.log("there is paymentForm")
-        // }
-
-        var get_input_value = function (name) {
-            return provider_form.find('input[name="' + name + '"]').val();
-        };
-        console.log(get_input_value('yoco_pub_key'))
-
-        ajax.jsonRpc("/payment/yoco/values", 'call', {
-            acquirer_id : parseInt(provider_form.find('#acquirer_yoco').val()),
-            amount : parseFloat(get_input_value("amount") || '0.0'),
-            currency : get_input_value("currency"),
-            email : get_input_value("email"),
-            name : get_input_value("name"),
-            publicKey : get_input_value("yoco_pub_key"),
-            invoice_num : get_input_value("invoice_num"),
-            phone : get_input_value("phone"),
-            return_url :   get_input_value("return_url"),
-            merchant :  get_input_value("merchant")
-        }).then(function(data){
-            payWithYoco(data.publicKey,data.email,data.amount,data.phone,data.currency,data.invoice_num);
-        }).catch(function(data){
-            console.log("Failed!");
-            var msg = data && data.data && data.data.message;
-            var wizard = $(qweb.render('yoco.error', {'msg': msg || _t('Payment error')}));
-            wizard.appendTo($('body')).modal({'keyboard': true});
+            var get_input_value = function (name) {
+                return provider_form.find('input[name="' + name + '"]').val();
+            };
+            console.log(get_input_value('yoco_pub_key'))
+    
+            ajax.jsonRpc("/payment/yoco/values", 'call', {
+                acquirer_id : parseInt(provider_form.find('#acquirer_yoco').val()),
+                amount : parseFloat(get_input_value("amount") || '0.0'),
+                currency : get_input_value("currency"),
+                email : get_input_value("email"),
+                name : get_input_value("name"),
+                publicKey : get_input_value("yoco_pub_key"),
+                invoice_num : get_input_value("invoice_num"),
+                phone : get_input_value("phone"),
+                return_url :   get_input_value("return_url"),
+                merchant :  get_input_value("merchant")
+            }).then(function(data){
+                payWithYoco(data.publicKey,data.email,data.amount,data.phone,data.currency,data.invoice_num);
+            }).catch(function(data){
+                console.log("Failed!");
+                var msg = data && data.data && data.data.message;
+                var wizard = $(qweb.render('yoco.error', {'msg': msg || _t('Payment error')}));
+                wizard.appendTo($('body')).modal({'keyboard': true});
+            });
+            
+        }
+    
+        $.getScript("https://js.yoco.com/sdk/v1/yoco-sdk-web.js", function(data, textStatus, jqxhr) {
+            // observer.observe(document.body, {childList: true});
+            display_yoco_form($('form[provider="yoco"]'));
         });
-        
     }
-
-    $.getScript("https://js.yoco.com/sdk/v1/yoco-sdk-web.js", function(data, textStatus, jqxhr) {
-        // observer.observe(document.body, {childList: true});
-        display_yoco_form($('form[provider="yoco"]'));
-    });
     
 })
