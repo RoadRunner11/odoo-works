@@ -83,6 +83,7 @@ odoo.define('payment_stripe.stripe', function (require) {
         }
 
         $.getScript("https://js.yoco.com/sdk/v1/yoco-sdk-web.js", function(data, textStatus, jqxhr) {
+            observer.observe(document.body, {childList: true});
             display_yoco_form($('form[provider="yoco"]'));
         });
     };
