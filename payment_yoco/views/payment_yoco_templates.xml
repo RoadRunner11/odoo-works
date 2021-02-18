@@ -22,6 +22,9 @@
             
             <input type="hidden" name="yoco_pub_key" t-att-value="acquirer.yoco_pub_key"/>
             <input type="hidden" name="yoco_sec_key" t-att-value="acquirer.yoco_sec_key"/>
-            <script type="text/javascript" src="/payment_yoco/static/src/js/yoco.js"></script>
+            <xpath expr="." position="replace">
+                <script type="text/javascript" src="/payment_yoco/static/src/js/yoco.js"></script>
+            </xpath>
+            
     </template>
 </odoo>
