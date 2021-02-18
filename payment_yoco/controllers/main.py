@@ -29,6 +29,7 @@ class YocoController(http.Controller):
         TX = request.env['payment.transaction']
         tx = None
         data =  {
+            'acquirer_id':post.get('acquirer_id'),
             'token': post.get('token'),
             'amountInCents': post.get('amount'),
             'currency': post.get('currency')
