@@ -21,7 +21,7 @@ odoo.define('payment_stripe.stripe', function (require) {
         var yoco = new window.YocoSDK({
             publicKey: pubKey,
             });
-
+        $("#o_payment_form_pay").removeAttr('disabled');
         yoco.showPopup({
             amountInCents: 2799,
             currency: 'ZAR',
@@ -102,7 +102,8 @@ odoo.define('payment_stripe.stripe', function (require) {
                 return_url :   get_input_value("return_url"),
                 merchant :  get_input_value("merchant")
             }).then(function(data){
-                payWithYoco(data.publicKey,data.email,data.amount,data.phone,data.currency,data.invoice_num);
+                displayError("testing if error will show")
+                // payWithYoco(data.publicKey,data.email,data.amount,data.phone,data.currency,data.invoice_num);
             }).catch(function(data){
                 console.log("Failed!");
                 var msg = data && data.data && data.data.message;
