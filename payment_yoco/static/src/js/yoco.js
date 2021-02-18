@@ -39,6 +39,9 @@ odoo.define('payment_stripe.stripe', function (require) {
                 // server along with the order/basket that the customer has purchased.
             }
         })
+        if ($.blockUI) {
+            $.unblockUI();
+        }
         $("#o_payment_form_pay").removeAttr('disabled');
     }
     
@@ -103,8 +106,8 @@ odoo.define('payment_stripe.stripe', function (require) {
                 return_url :   get_input_value("return_url"),
                 merchant :  get_input_value("merchant")
             }).then(function(data){
-                displayError("testing if error will show")
-                // payWithYoco(data.publicKey,data.email,data.amount,data.phone,data.currency,data.invoice_num);
+                // displayError("testing if error will show")
+                payWithYoco(data.publicKey,data.email,data.amount,data.phone,data.currency,data.invoice_num);
             }).catch(function(data){
                 console.log("Failed!");
                 var msg = data && data.data && data.data.message;
