@@ -21,7 +21,7 @@ odoo.define('payment_stripe.stripe', function (require) {
         var yoco = new window.YocoSDK({
             publicKey: pubKey,
             });
-        $("#o_payment_form_pay").removeAttr('disabled');
+        
         yoco.showPopup({
             amountInCents: 2799,
             currency: 'ZAR',
@@ -39,6 +39,7 @@ odoo.define('payment_stripe.stripe', function (require) {
                 // server along with the order/basket that the customer has purchased.
             }
         })
+        $("#o_payment_form_pay").removeAttr('disabled');
     }
     
 
