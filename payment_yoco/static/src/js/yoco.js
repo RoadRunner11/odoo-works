@@ -33,14 +33,14 @@ odoo.define('payment_stripe.stripe', function (require) {
                 const errorMessage = result.error.message;
                 alert("error occured: " + errorMessage);
                 } else {
-                    if ($.blockUI) {
-                        var msg = _t("Just one more second, confirming your payment...");
-                        $.blockUI({
-                            'message': '<h2 class="text-white"><img src="/web/static/src/img/spin.png" class="fa-pulse"/>' +
-                                    '    <br />' + msg +
-                                    '</h2>'
-                        });
-                    }
+                    // if ($.blockUI) {
+                    //     var msg = _t("Just one more second, confirming your payment...");
+                    //     $.blockUI({
+                    //         'message': '<h2 class="text-white"><img src="/web/static/src/img/spin.png" class="fa-pulse"/>' +
+                    //                 '    <br />' + msg +
+                    //                 '</h2>'
+                    //     });
+                    // }
                     if ( result.status == "charge_ready") {
                         // redirect to a success page
                         ajax.jsonRpc("/payment/yoco/verify_charge", 'call', {
@@ -55,7 +55,7 @@ odoo.define('payment_stripe.stripe', function (require) {
                         }).catch(function(data){
                             console.log("Failed to redirect!");
                             var msg = data && data.data && data.data.message;
-                            var wizard = $(qweb.render('rave.error', {'msg': msg || _t('Payment error')}));
+                            var wizard = $(qweb.render('yoco.error', {'msg': msg || _t('Payment error')}));
                             wizard.appendTo($('body')).modal({'keyboard': true});
                         });
                     }    
