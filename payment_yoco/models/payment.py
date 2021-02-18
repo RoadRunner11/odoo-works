@@ -25,10 +25,8 @@ class PaymentAcquirerYoco(models.Model):
     yoco_pub_key = fields.Char(string="Yoco Pub Key", required_if_provider='yoco', groups='base.group_user')
     yoco_sec_key = fields.Char(string="Yoco Sec Key", required_if_provider='yoco', groups='base.group_user')
 
-    def _get_yoco_api_url(self, environment):
+    def _get_yoco_api_url(self):
         """ PayUlatam URLs"""
-        if environment == 'prod':
-            return 'https://online.yoco.com/v1/charges/'
         return 'https://online.yoco.com/v1/charges/'
     
 
