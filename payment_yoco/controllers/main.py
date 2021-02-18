@@ -31,7 +31,7 @@ class YocoController(http.Controller):
         data =  {
             'acquirer_id':post.get('acquirer_id'),
             'token': post.get('token'),
-            'amountInCents': post.get('amount'),
+            'amount': post.get('amount'),
             'currency': post.get('currency')
         }
         if post.get('tx_ref'):
