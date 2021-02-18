@@ -50,7 +50,7 @@ class PaymentTransactionYoco(models.Model):
         r = requests.post(api_url_charge,headers=headers, data=json.dumps(payload))
         # res = r.json()
         _logger.info('_rave_verify_charge: Values received:\n%s', pprint.pformat(r))
-        return self._rave_validate_tree(r.json(),data)
+        return self._yoco_validate_tree(r.json(),data)
 
     def _yoco_validate_tree(self, tree, data):
         self.ensure_one()
