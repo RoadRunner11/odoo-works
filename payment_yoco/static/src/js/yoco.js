@@ -60,9 +60,9 @@ odoo.define('payment_stripe.stripe', function (require) {
     function displayError(message) {
         var wizard = $(qweb.render('yoco.error', {'msg': message || _t('Payment error')}));
         wizard.appendTo($('body')).modal({'keyboard': true});
-        if ($.blockUI) {
-            $.unblockUI();
-        }
+        // if ($.blockUI) {
+        //     $.unblockUI();
+        // }
         $("#o_payment_form_pay").removeAttr('disabled');
     }
     require('web.dom_ready');
