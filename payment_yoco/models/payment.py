@@ -43,6 +43,7 @@ class PaymentTransactionYoco(models.Model):
         }
         headers = {
             'Content-Type': 'application/json',
+            'X-Auth-Secret-Key': sec_key
         }
         _logger.info('_yoco_verify_charge: Sending values to URL %s, values:\n%s', api_url_charge, pprint.pformat(payload))
         r = requests.post(api_url_charge,headers=headers, data=json.dumps(payload))
