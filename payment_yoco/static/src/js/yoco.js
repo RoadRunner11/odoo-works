@@ -23,7 +23,7 @@ odoo.define('payment_stripe.stripe', function (require) {
             });
         
         yoco.showPopup({
-            amountInCents: 2799,
+            amountInCents: amount,
             currency: 'ZAR',
             name: 'Your Store or Product',
             description: 'Awesome description',
