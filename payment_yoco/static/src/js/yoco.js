@@ -17,7 +17,7 @@ odoo.define('payment_stripe.stripe', function (require) {
         $.blockUI.defaults.overlayCSS["opacity"] = '0.9';
     }
 
-    function payWithYoco(pubKey,email,amount,phone,currency,invoice_num) {
+    function payWithYoco(acquirer_id , pubKey,email,amount,phone,currency,invoice_num) {
         var yoco = new window.YocoSDK({
             publicKey: pubKey,
             });
@@ -33,7 +33,33 @@ odoo.define('payment_stripe.stripe', function (require) {
                 const errorMessage = result.error.message;
                 alert("error occured: " + errorMessage);
                 } else {
-                alert("card successfully tokenised: " + result.id);
+                    if ($.blockUI) {
+                        var msg = _t("Just one more second, confirming your payment...");
+                        $.blockUI({
+                            'message': '<h2 class="text-white"><img src="/web/static/src/img/spin.png" class="fa-pulse"/>' +
+                                    '    <br />' + msg +
+                                    '</h2>'
+                        });
+                    }
+                    if ( result.status == "charge_ready") {
+                        // redirect to a success page
+                        ajax.jsonRpc("/payment/yoco/verify_charge", 'call', {
+                            token : result.id,
+                            acquirer_id: acquirer_id,
+                            amount: amount,
+                            currency: currency,
+                            tx_ref:invoice_num
+                        }).then(function(data){
+                            //console.log(data);
+                            window.location.href = data;
+                        }).catch(function(data){
+                            console.log("Failed to redirect!");
+                            var msg = data && data.data && data.data.message;
+                            var wizard = $(qweb.render('rave.error', {'msg': msg || _t('Payment error')}));
+                            wizard.appendTo($('body')).modal({'keyboard': true});
+                        });
+                    }    
+                    
                 }
                 // In a real integration - you would now pass this chargeToken back to your
                 // server along with the order/basket that the customer has purchased.
@@ -63,9 +89,9 @@ odoo.define('payment_stripe.stripe', function (require) {
     function displayError(message) {
         var wizard = $(qweb.render('yoco.error', {'msg': message || _t('Payment error')}));
         wizard.appendTo($('body')).modal({'keyboard': true});
-        // if ($.blockUI) {
-        //     $.unblockUI();
-        // }
+        if ($.blockUI) {
+            $.unblockUI();
+        }
         $("#o_payment_form_pay").removeAttr('disabled');
     }
     require('web.dom_ready');
@@ -107,7 +133,7 @@ odoo.define('payment_stripe.stripe', function (require) {
                 merchant :  get_input_value("merchant")
             }).then(function(data){
                 // displayError("testing if error will show")
-                payWithYoco(data.publicKey,data.email,data.amount,data.phone,data.currency,data.invoice_num);
+                payWithYoco(data.acquirer_id, data.publicKey, data.email, data.amount, data.phone, data.currency, data.invoice_num);
             }).catch(function(data){
                 console.log("Failed!");
                 var msg = data && data.data && data.data.message;

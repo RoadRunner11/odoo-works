@@ -27,7 +27,7 @@ class RaveController(http.Controller):
         Expects the result from the user input from flwpbf-inline.js popup"""
         TX = request.env['payment.transaction']
         tx = None
-        data = post.get('data');
+        data = post.get('data')
         if post.get('tx_ref'):
             tx = TX.sudo().search([('reference', '=', post.get('tx_ref'))])
         if not tx:

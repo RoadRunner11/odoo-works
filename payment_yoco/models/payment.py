@@ -2,6 +2,9 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 import logging
+import requests
+import pprint
+import json
 
 from hashlib import md5
 from werkzeug import urls
@@ -22,7 +25,7 @@ class PaymentAcquirerYoco(models.Model):
     yoco_pub_key = fields.Char(string="Yoco Pub Key", required_if_provider='yoco', groups='base.group_user')
     yoco_sec_key = fields.Char(string="Yoco Sec Key", required_if_provider='yoco', groups='base.group_user')
 
-    def _get_yoco_urls(self, environment):
+    def _get_yoco_api_url(self, environment):
         """ PayUlatam URLs"""
         if environment == 'prod':
             return 'https://online.yoco.com/v1/charges/'
@@ -32,12 +35,50 @@ class PaymentAcquirerYoco(models.Model):
 class PaymentTransactionYoco(models.Model):
     _inherit = 'payment.transaction'
 
-    def _rave_verify_charge(self, data):
-        api_url_charge = 'https://%s/flwv3-pug/getpaidx/api/v2/verify' % (self.acquirer_id._get_rave_api_url())
+    def _yoco_verify_charge(self, data):
+        api_url_charge =  self.acquirer_id._get_yoco_api_url()
+        sec_key = request.env['payment.acquirer'].browse(data.acquirer_id).yoco_sec_key
         payload = {
-            'SECKEY': self.acquirer_id.rave_secret_key,
-            'txref': self.reference,
+            'token': data['token'],
+            'amountInCents': data['amount'],
+            'currency': data['currency']
         }
         headers = {
             'Content-Type': 'application/json',
         }
+        _logger.info('_yoco_verify_charge: Sending values to URL %s, values:\n%s', api_url_charge, pprint.pformat(payload))
+        r = requests.post(api_url_charge,headers=headers, data=json.dumps(payload))
+        # res = r.json()
+        _logger.info('_rave_verify_charge: Values received:\n%s', pprint.pformat(r))
+        return self._rave_validate_tree(r.json(),data)
+
+    def _yoco_validate_tree(self, tree, data):
+        self.ensure_one()
+        if self.state != 'draft':
+            _logger.info('Rave: trying to validate an already validated tx (ref %s)', self.reference)
+            return True
+
+        status = tree.get('status')
+        amount = tree["amountInCents"]
+        currency = tree["currency"]
+        
+        if status == 'successful' and amount == data["amount"] and currency == data["currency"] :
+            self.write({
+                'date': fields.datetime.now(),
+                'acquirer_reference': tree["id"],
+            })
+            self._set_transaction_done()
+            self.execute_callback()
+            if self.payment_token_id:
+                self.payment_token_id.verified = True
+            return True
+        else:
+            error = tree['errorMessage']
+            _logger.warn(error)
+            self.sudo().write({
+                'state_message': error,
+                'acquirer_reference':tree["id"],
+                'date': fields.datetime.now(),
+            })
+            self._set_transaction_cancel()
+            return False

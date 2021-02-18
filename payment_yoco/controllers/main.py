@@ -21,14 +21,18 @@ class YocoController(http.Controller):
         # values = acquirer.rave_form_generate_values(acquirer)
         return post
 
-    @http.route(['/payment/rave/verify_charge'], type='json', auth='public')
-    def rave_verify_charge(self, **post):
+    @http.route(['/payment/yoco/verify_charge'], type='json', auth='public')
+    def yoco_verify_charge(self, **post):
         """ Verify a payment transaction
 
         Expects the result from the user input from flwpbf-inline.js popup"""
         TX = request.env['payment.transaction']
         tx = None
-        data = post.get('data');
+        data =  {
+            'token': post.get('token'),
+            'amountInCents': post.get('amount'),
+            'currency': post.get('currency')
+        }
         if post.get('tx_ref'):
             tx = TX.sudo().search([('reference', '=', post.get('tx_ref'))])
         if not tx:
@@ -44,10 +48,10 @@ class YocoController(http.Controller):
                 'partner_id': tx.partner_id.id,
             })
             tx.payment_token_id = payment_token_id
-            response = tx._rave_verify_charge(data)
+            response = tx._yoco_verify_charge(data)
         else:
-            response = tx._rave_verify_charge(data)
-        _logger.info('Rave: entering form_feedback with post data %s', pprint.pformat(response))
+            response = tx._yoco_verify_charge(data)
+        _logger.info('Yoco: entering form_feedback with post data %s', pprint.pformat(response))
         if response:
             request.env['payment.transaction'].sudo().with_context(lang=None).form_feedback(response, 'rave')
         # add the payment transaction into the session to let the page /payment/process to handle it
