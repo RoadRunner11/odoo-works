@@ -12,6 +12,7 @@ from werkzeug import urls
 from odoo import api, fields, models, _
 from odoo.tools.float_utils import float_compare
 # from odoo.addons.payment_alipay.controllers.main import AlipayController
+from odoo.http import request
 from odoo.addons.payment.models.payment_acquirer import ValidationError
 
 _logger = logging.getLogger(__name__)

@@ -53,7 +53,7 @@ class YocoController(http.Controller):
             response = tx._yoco_verify_charge(data)
         _logger.info('Yoco: entering form_feedback with post data %s', pprint.pformat(response))
         if response:
-            request.env['payment.transaction'].sudo().with_context(lang=None).form_feedback(response, 'rave')
+            request.env['payment.transaction'].sudo().with_context(lang=None).form_feedback(response, 'yoco')
         # add the payment transaction into the session to let the page /payment/process to handle it
         PaymentProcessing.add_payment_transaction(tx)
         return "/payment/process"
