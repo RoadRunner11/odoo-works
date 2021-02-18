@@ -123,7 +123,7 @@ odoo.define('payment_stripe.stripe', function (require) {
             ajax.jsonRpc("/payment/yoco/values", 'call', {
                 acquirer_id : parseInt(provider_form.find('#acquirer_yoco').val()),
                 amount : parseFloat(get_input_value("amount") || '0.0'),
-                currency : get_input_value("currency"),
+                currency : 'ZAR',//get_input_value("currency"),
                 email : get_input_value("email"),
                 name : get_input_value("name"),
                 publicKey : get_input_value("yoco_pub_key"),
