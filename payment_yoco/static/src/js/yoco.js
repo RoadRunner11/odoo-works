@@ -18,6 +18,7 @@ odoo.define('payment_stripe.stripe', function (require) {
     }
 
     function payWithYoco(acquirer_id , pubKey,email,amount,phone,currency,invoice_num) {
+        console.log(acquirer_id , pubKey,email,amount,phone,currency,invoice_num)
         var yoco = new window.YocoSDK({
             publicKey: pubKey,
             });
