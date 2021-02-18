@@ -19,6 +19,7 @@ odoo.define('payment_stripe.stripe', function (require) {
 
     function payWithYoco(acquirer_id , pubKey,email,amount,phone,currency,invoice_num) {
         console.log(acquirer_id , pubKey,email,amount,phone,currency,invoice_num)
+        
         var yoco = new window.YocoSDK({
             publicKey: pubKey,
             });
@@ -123,7 +124,7 @@ odoo.define('payment_stripe.stripe', function (require) {
     
             ajax.jsonRpc("/payment/yoco/values", 'call', {
                 acquirer_id : parseInt(provider_form.find('#acquirer_yoco').val()),
-                amount : parseFloat(get_input_value("amount") || '0.0'),
+                amount : parseFloat(get_input_value("amount") || '0.0') * 17 * 100,
                 currency : 'ZAR',//get_input_value("currency"),
                 email : get_input_value("email"),
                 name : get_input_value("name"),
@@ -134,6 +135,7 @@ odoo.define('payment_stripe.stripe', function (require) {
                 merchant :  get_input_value("merchant")
             }).then(function(data){
                 // displayError("testing if error will show")
+
                 payWithYoco(data.acquirer_id, data.publicKey, data.email, data.amount, data.phone, data.currency, data.invoice_num);
             }).catch(function(data){
                 console.log("Failed!");
