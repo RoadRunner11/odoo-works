@@ -69,8 +69,8 @@ def intent_ext(user_input):
 #         input('Your intent is not recognized.')
 #     return input('Please rephrase your request. Be as specific as possible!') 
 
-def add_sale_info(inp, context):
-	doc = nlp(msg)
+def add_sale_info(body, context):
+	doc = nlp(body)
 	ids = []
 	for token in doc:
 		if token.pos_ == 'NOUN':
