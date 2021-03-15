@@ -1,5 +1,5 @@
 import spacy
-
+from odoo import _
 nlp = spacy.load("en_core_web_sm")
 
 def details_to_str(user_data):
