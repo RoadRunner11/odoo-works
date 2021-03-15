@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, _, fields, api
-from .utils import int_ext, add_sale_info
+from .utils import intent_ext, add_sale_info
 import logging
 
 _logger = logging.getLogger(__name__)
