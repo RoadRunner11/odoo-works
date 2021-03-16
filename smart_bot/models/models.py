@@ -26,6 +26,9 @@ class SmartBot(models.AbstractModel):
 				return _("Kindly provide the details of the sale order")
 			if odoobot_state == 'createSale':
 				context = {"name":'', 'partner_id': "", 'pricelist_id':"" }
-				add_sale_info(body, context)
-   
+				return add_sale_info(body, context)
+
+			elif odoobot_state == 'getSale':
+				return _("Do you want to a sale record")
+
 		return super(SmartBot, self)._get_answer(record, body, values, command=False)
