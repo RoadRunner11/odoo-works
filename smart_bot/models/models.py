@@ -23,7 +23,7 @@ class SmartBot(models.AbstractModel):
 				return _("Hello from Ehio Technologies!")
 			if intent == "createSale":
 				self.env.user.odoobot_state = "createSale"
-				return _("Kindly provide the details of the sale order")
+				return _("Kindly provide the details of the sale order, in the formate name, partner id and pricelist id")
 			if odoobot_state == 'createSale':
 				context = {"name":'', 'partner_id': "", 'pricelist_id':"" }
 				return add_sale_info(body, context, self)
