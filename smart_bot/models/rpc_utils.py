@@ -3,25 +3,29 @@
 # coding: utf-8
 
 import xmlrpc.client as xc
-
+import json
 # import xlrd
-
+with open('env.json', 'r') as env_file:
+	env_data = json.dumps(env_file)
+print(env_data)
+server = "http://52.14.87.243:8069/"
 dbname = 'odoo13'
 
 username = 'admin'
 
 pwd = 'admin'
 
-sock_common = xc.ServerProxy ('http://18.216.227.139:8069/xmlrpc/2/common')
+sock_common = xc.ServerProxy ('{}/xmlrpc/2/common'.format(server))
 
-sock = xc.ServerProxy('http://18.216.227.139:8069/xmlrpc/object')
+sock = xc.ServerProxy('{}/xmlrpc/object'.format(server))
 
 uid = sock_common.authenticate(dbname, username, pwd, {})
 
-def create_order():
+def create_order(context):
 	account_ids = sock.execute(dbname, uid, pwd, 'sale.order', 'create', 
-					{   'name': 'fist_order',
-						'partner_id': 1, 'pricelist_id':1
+					{   'name': context["name"],
+						'partner_id': context["partner_id"],
+						'pricelist_id':context["pricelist_id"]
 						})
 
 	return "Sale Order Created Successfully...!"

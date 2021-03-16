@@ -1,5 +1,6 @@
 import spacy
 from odoo import _
+from .rpc_utils import create_order
 nlp = spacy.load("en_core_web_sm")
 
 def details_to_str(user_data):
@@ -69,7 +70,7 @@ def intent_ext(user_input):
 #         input('Your intent is not recognized.')
 #     return input('Please rephrase your request. Be as specific as possible!') 
 
-def add_sale_info(body, context):
+def add_sale_info(body, context, obj):
 	doc = nlp(body)
 	ids = []
 	for token in doc:
@@ -79,6 +80,8 @@ def add_sale_info(body, context):
 			ids.append(token.text)
 	if context.values():
 		context['partner_id'], context['pricelist_id'] = ids[0], ids[1]
+		create_order(context)
+		obj.env.user.odoobot_state = "idle"
 		return _("Your sale has been created." "{}" "Have a nice day!".format(details_to_str(context)))
 	else:
 		return _("Cannot extract necessary info. Please try again.")
