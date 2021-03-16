@@ -4,10 +4,12 @@
 
 import xmlrpc.client as xc
 import json
+import os
 # import xlrd
-with open('env.json', 'r') as env_file:
-	env_data = json.dumps(env_file)
-print(env_data)
+
+# with open('env.json', 'r') as env_file:
+# 	env_data = json.dumps(env_file)
+# print(env_data)
 server = "http://52.14.87.243:8069/"
 dbname = 'odoo13'
 
